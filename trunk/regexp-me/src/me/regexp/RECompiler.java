@@ -27,7 +27,6 @@ import java.util.Hashtable;
  * do with regular expressions, see the documentation for the RE matcher class.
  *
  * @see RE
- * @see recompile
  *
  * @author <a href="mailto:jonl@muppetlabs.com">Jonathan Locke</a>
  * @author <a href="mailto:gholam@xtra.co.nz">Michael McCallum</a>

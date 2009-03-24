@@ -111,70 +111,11 @@ public class REDebugCompiler extends RECompiler
         return opcodeToString(opcode) + ", opdata = " + opdata;
     }
 
-    /**
-     * Adds a new node
-     *
-     * @param opcode Opcode for node
-     * @param opdata Opdata for node (only the low 16 bits are currently used)
-     * @return Index of new node in program
-     * /
-    int node(char opcode, int opdata)
-    {
-        System.out.println("====> Add " + opcode + " " + opdata);
-        PrintWriter writer = new PrintWriter(System.out);
-        dumpProgram(writer);
-        writer.flush();
-        int r = super.node(opcode, opdata);
-        System.out.println("====< ");
-        dumpProgram(writer);
-        writer.flush();
-        return r;
-    }/**/
 
     /**
-     * Inserts a node with a given opcode and opdata at insertAt.  The node relative next
-     * pointer is initialized to 0.
+     * Dumps the current program to a {@link PrintStream}.
      *
-     * @param opcode Opcode for new node
-     * @param opdata Opdata for new node (only the low 16 bits are currently used)
-     * @param insertAt Index at which to insert the new node in the program
-     * /
-    void nodeInsert(char opcode, int opdata, int insertAt)
-    {
-        System.out.println("====> Ins " + opcode + " " + opdata + " " + insertAt);
-        PrintWriter writer = new PrintWriter(System.out);
-        dumpProgram(writer);
-        writer.flush();
-        super.nodeInsert(opcode, opdata, insertAt);
-        System.out.println("====< ");
-        dumpProgram(writer);
-        writer.flush();
-    }/**/
-
-
-    /**
-     * Appends a node to the end of a node chain
-     *
-     * @param node Start of node chain to traverse
-     * @param pointTo Node to have the tail of the chain point to
-     * /
-    void setNextOfEnd(int node, int pointTo)
-    {
-        System.out.println("====> Link " + node + " " + pointTo);
-        PrintWriter writer = new PrintWriter(System.out);
-        dumpProgram(writer);
-        writer.flush();
-        super.setNextOfEnd(node, pointTo);
-        System.out.println("====< ");
-        dumpProgram(writer);
-        writer.flush();
-    }/**/
-
-
-    /**
-     * Dumps the current program to a {@link PrintWriter}.
-     *
-     * @param p PrintWriter for program dump output
+     * @param p PrintStream for program dump output
      */
     public void dumpProgram(PrintStream p)
     {

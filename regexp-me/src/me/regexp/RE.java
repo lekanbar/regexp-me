@@ -224,29 +224,7 @@ import java.util.Vector;
  * <p>
  * RE runs programs compiled by the RECompiler class.  But the RE
  * matcher class does not include the actual regular expression compiler
- * for reasons of efficiency.  In fact, if you want to pre-compile one
- * or more regular expressions, the 'recompile' class can be invoked
- * from the command line to produce compiled output like this:
- *
- * <pre>
- *    // Pre-compiled regular expression "a*b"
- *    char[] re1Instructions =
- *    {
- *        0x007c, 0x0000, 0x001a, 0x007c, 0x0000, 0x000d, 0x0041,
- *        0x0001, 0x0004, 0x0061, 0x007c, 0x0000, 0x0003, 0x0047,
- *        0x0000, 0xfff6, 0x007c, 0x0000, 0x0003, 0x004e, 0x0000,
- *        0x0003, 0x0041, 0x0001, 0x0004, 0x0062, 0x0045, 0x0000,
- *        0x0000,
- *    };
- *
- *
- *    REProgram re1 = new REProgram(re1Instructions);
- * </pre>
- *
- * You can then construct a regular expression matcher (RE) object from
- * the pre-compiled expression re1 and thus avoid the overhead of
- * compiling the expression at runtime. If you require more dynamic
- * regular expressions, you can construct a single RECompiler object and
+ * for reasons of efficiency. You can construct a single RECompiler object and
  * re-use it to compile each expression. Similarly, you can change the
  * program run by a given matcher object at any time. However, RE and
  * RECompiler are not threadsafe (for efficiency reasons, and because
@@ -284,7 +262,6 @@ import java.util.Vector;
  *
  * </font>
  *
- * @see recompile
  * @see RECompiler
  *
  * @author <a href="mailto:jonl@muppetlabs.com">Jonathan Locke</a>
@@ -411,7 +388,6 @@ public class RE {
      * @param pattern The regular expression pattern to compile.
      * @exception RESyntaxException Thrown if the regular expression has invalid syntax.
      * @see RECompiler
-     * @see recompile
      */
     public RE(String pattern) throws RESyntaxException {
         this(pattern, MATCH_NORMAL);
@@ -426,7 +402,6 @@ public class RE {
      * @param matchFlags The matching style
      * @exception RESyntaxException Thrown if the regular expression has invalid syntax.
      * @see RECompiler
-     * @see recompile
      */
     public RE(String pattern, int matchFlags) throws RESyntaxException {
         this(new RECompiler().compile(pattern), matchFlags);
@@ -437,7 +412,7 @@ public class RE {
      * (bytecode) data.  Permits special flags to be passed in to modify matching
      * behaviour.
      *
-     * @param program Compiled regular expression program (see RECompiler and/or recompile)
+     * @param program Compiled regular expression program (see RECompiler)
      * @param matchFlags One or more of the RE match behaviour flags (RE.MATCH_*):
      *
      * <pre>
@@ -448,7 +423,6 @@ public class RE {
      *
      * @see RECompiler
      * @see REProgram
-     * @see recompile
      */
     public RE(REProgram program, int matchFlags) {
         setProgram(program);
@@ -461,7 +435,6 @@ public class RE {
      *
      * @param program Compiled regular expression program
      * @see RECompiler
-     * @see recompile
      */
     public RE(REProgram program) {
         this(program, MATCH_NORMAL);
@@ -548,7 +521,6 @@ public class RE {
      * @param program Regular expression program compiled by RECompiler.
      * @see RECompiler
      * @see REProgram
-     * @see recompile
      */
     public void setProgram(REProgram program) {
         this.program = program;

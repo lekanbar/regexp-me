@@ -18,10 +18,8 @@
 package me.regexp;
 
 /**
- * A class that holds compiled regular expressions.  This is exposed mainly
- * for use by the recompile utility (which helps you produce precompiled
- * REProgram objects). You should not otherwise need to work directly with
- * this class.
+ * A class that holds compiled regular expressions.  You should not need to
+ * work directly with this class.
  *
  * @see RE
  * @see RECompiler
